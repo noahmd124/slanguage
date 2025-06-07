@@ -86,20 +86,28 @@ function createSlangCard(item) {
   const card = document.createElement('div');
   card.className = 'slang-card';
 
-  // Add ribbon if offensive
   const ribbon = item.offensive ? `<div class="ribbon">⚠️ Offensive</div>` : '';
-  
+
   card.innerHTML = `
     ${ribbon}
     <h3>${item.word}</h3>
     <p><strong>Meaning:</strong> ${item.meaning}</p>
     <p><strong>Origin:</strong> ${item.origin || 'Unknown'}</p>
     <p><em>${item.about || ''}</em></p>
-	 
+    <button class="hear-btn">🔊 Hear</button>
   `;
+
+  // Add Web Speech API
+  const hearButton = card.querySelector('.hear-btn');
+  hearButton.addEventListener('click', () => {
+    const utterance = new SpeechSynthesisUtterance(`${item.word}. ${item.meaning}`);
+    utterance.lang = 'en-GB';
+    speechSynthesis.speak(utterance);
+  });
 
   return card;
 }
+
 
 </script>
   
