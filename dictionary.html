@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Free Parent Slang Dictionary" />
+  <meta name="keywords" content="Slang, slang meaning, rizz meaning, skibidi, rizz, slang meanings, what do kid words mean, slang dictionary, urban dictionary, urban words, slang words, slay meaning, zesty meaning" />
+  <meta name="author" content="Slanguage" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Slanguage - Slang Dictionary</title>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="nav-left">Slanguage</div>
+      <div class="burger" id="burger">&#9776;</div>
+      <ul class="nav-right" id="navMenu">
+        <li><a href="#slangList">Dictionary</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#submitSlang">Submit</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header>
+    <h1>📖 Slanguage</h1>
+    <p>The parent slang dictionary</p>
+    <br /><br />
+    <input type="text" id="searchInput" placeholder="Search for slang..." />
+  </header>
+
+  <main>
+    
+	<section id="slangList">
+  <!-- Slang cards will be inserted here by JavaScript -->
+</section>
+
+
+
+
+
+    <br><br>
+
+    <section id="submitSlang">
+      <h2 style="text-align: center;">💬 Ask The Meaning Of a Slang Word</h2>
+      <br />
+      <form id="slangForm">
+        <input type="text" placeholder="Slang word" required />
+        <textarea placeholder="Question" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+  
+  
+  <script src="slangData.js"></script>
+
+ 
+ <script>
+ 
+ // Wait for DOM to load
+document.addEventListener('DOMContentLoaded', () => {
+  // Fill trending slang
+  const trendingList = document.getElementById('trendingList');
+  if (trendingList) {
+    trendingList.innerHTML = '';
+    slangData.filter(item => item.trending).forEach(item => {
+      const card = createSlangCard(item);
+      trendingList.appendChild(card);
+    });
+  }
+
+  // Fill full dictionary slang list
+  const slangList = document.getElementById('slangList');
+  if (slangList) {
+    slangList.innerHTML = '';
+    slangData.forEach(item => {
+      const card = createSlangCard(item);
+      slangList.appendChild(card);
+    });
+  }
+});
+
+// Helper function to create a card element for a slang word
+function createSlangCard(item) {
+  const card = document.createElement('div');
+  card.className = 'slang-card';
+
+  // Add ribbon if offensive
+  const ribbon = item.offensive ? `<div class="ribbon">⚠️ Offensive</div>` : '';
+  
+  card.innerHTML = `
+    ${ribbon}
+    <h3>${item.word}</h3>
+    <p><strong>Meaning:</strong> ${item.meaning}</p>
+    <p><strong>Origin:</strong> ${item.origin || 'Unknown'}</p>
+    <p><em>${item.about || ''}</em></p>
+	 
+  `;
+
+  return card;
+}
+
+</script>
+  
+  
+  
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slangList = document.getElementById('slangList');
+  const modal = document.getElementById('slangModal');
+  const closeModal = document.getElementById('closeModal');
+
+  const modalWord = document.getElementById('modalWord');
+  const modalMeaning = document.getElementById('modalMeaning');
+  const modalOrigin = document.getElementById('modalOrigin');
+  const modalAbout = document.getElementById('modalAbout');
+
+  const playAudioBtn = document.getElementById('playAudio');
+  let currentWord = '';
+
+  slangData.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'slang-card';
+    card.innerHTML = `
+      <h3>${item.word}</h3>
+      <p>${item.meaning}</p>
+       <button onclick="speakSlang('${slang.word}', '${slang.meaning}')">🔊 Hear</button>
+	   
+    `;
+	
+	
+	function speakSlang(word, meaning) {
+  const utterance = new SpeechSynthesisUtterance(`${word}: ${meaning}`);
+  utterance.lang = 'en-GB'; // or 'en-US'
+  speechSynthesis.speak(utterance);
+}
+
+
+    card.querySelector('.more-btn').addEventListener('click', () => {
+      currentWord = item.word;
+      modalWord.textContent = item.word;
+      modalMeaning.textContent = item.meaning;
+      modalOrigin.textContent = item.origin || 'Unknown';
+      modalAbout.textContent = item.about || '';
+
+      modal.classList.remove('hidden');
+    });
+
+    slangList.appendChild(card);
+  });
+
+  closeModal.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  
+</script>
+
+  
+  
+</body>
+</html>

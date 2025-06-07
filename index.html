@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slanguage</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #6a11cb, #2575fc, #6a11cb, #2575fc);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
+      overflow: hidden;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .spinner {
+      width: 80px;
+      height: 80px;
+      border: 10px solid rgba(255, 255, 255, 0.2);
+      border-top: 10px solid white;
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-family: sans-serif;
+      font-size: 4rem;
+      color: white;
+      opacity: 0;
+      animation: fadeInOut 5s ease forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <h1>Slanguage</h1>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "dictionary.html";
+    }, 5000);
+  </script>
+</body>
+</html>

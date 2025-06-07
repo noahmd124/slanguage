@@ -1,0 +1,211 @@
+ /* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #ffffff; /* fixed typo: was #fffff */
+  color: #2e1e0f;
+}
+
+header {
+  background: #ffffff; /* fixed typo: was #fffff */
+  padding: 20px;
+  text-align: center;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+#searchInput {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 5px;
+  border: 1.5px solid #4d79ff;
+  box-sizing: border-box;
+}
+
+main {
+  padding: 20px;
+}
+
+/* Slang cards */
+.card {
+  background: #4d79ff;
+  color: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.card h3 {
+  margin: 0 0 5px;
+  color: white;
+}
+
+.card p {
+  margin: 0;
+}
+
+section {
+  margin-top: 30px;
+}
+
+/* Form styles */
+form input, form textarea, form button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  box-sizing: border-box;
+}
+
+form button {
+  background: #4d79ff;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background: #3a5edc;
+}
+
+/* Grid layout for slang list */
+#slangList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Ribbon style for warnings */
+.ribbon {
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  background: #1ad1ff;
+  color: white;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Navigation styles */
+nav {
+  background-color: #4d79ff;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Flex container for nav content */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left side nav title */
+.nav-left {
+  font-weight: bold;
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* Right side nav links */
+.nav-right {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-right a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.nav-right a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Burger icon */
+.burger {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  display: none;
+  user-select: none;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .nav-right {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #4d79ff;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-right.show {
+    display: flex;
+  }
+
+  .burger {
+    display: block;
+  }
+}
+
+/* Slang Cards */
+.slang-card {
+  background-color: #4d79ff;
+  color: white;
+  padding: 16px;
+  margin: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.slang-card h3 {
+  margin: 0 0 10px;
+}
+
+.more-btn {
+  background: white;
+  color: #4d79ff;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
