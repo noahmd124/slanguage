@@ -1,11 +1,11 @@
  /* General styles */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background: #ffffff; /* fixed typo: was #fffff */
-  color: #2e1e0f;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
 }
+
 
 header {
   background: #ffffff; /* fixed typo: was #fffff */
@@ -30,7 +30,7 @@ header h1 {
   width: 90%;
   max-width: 500px;
   border-radius: 5px;
-  border: 1.5px solid #4d79ff;
+  border: 1.5px solid linear-gradient(135deg, #6a11cb, #2575fc);
   box-sizing: border-box;
 }
 
@@ -40,7 +40,7 @@ main {
 
 /* Slang cards */
 .card {
-  background: #4d79ff;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: white;
   border-radius: 12px;
   padding: 15px;
@@ -75,7 +75,7 @@ form input, form textarea, form button {
 }
 
 form button {
-  background: #4d79ff;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
@@ -99,8 +99,8 @@ form button:hover {
   position: absolute;
   top: 10px;
   left: -10px;
-  background: #1ad1ff;
-  color: white;
+  background: white;
+  color: black;
   padding: 4px 10px;
   font-size: 0.75rem;
   border-radius: 4px;
@@ -109,7 +109,7 @@ form button:hover {
 
 /* Navigation styles */
 nav {
-  background-color: #4d79ff;
+  background-color: linear-gradient(135deg, #6a11cb, #2575fc);
   padding: 10px 20px;
   position: sticky;
   top: 0;
@@ -169,7 +169,7 @@ nav {
     display: none;
     flex-direction: column;
     gap: 15px;
-    background-color: #4d79ff;
+    background-color: linear-gradient(135deg, #6a11cb, #2575fc);
     position: absolute;
     top: 60px;
     right: 20px;
@@ -189,7 +189,7 @@ nav {
 
 /* Slang Cards */
 .slang-card {
-  background-color: #4d79ff;
+  background-color: linear-gradient(135deg, #6a11cb, #2575fc);
   color: white;
   padding: 16px;
   margin: 12px;
@@ -201,11 +201,3 @@ nav {
   margin: 0 0 10px;
 }
 
-.more-btn {
-  background: white;
-  color: #4d79ff;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
