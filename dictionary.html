@@ -6,166 +6,135 @@
   <meta name="keywords" content="Slang, slang meaning, rizz meaning, skibidi, rizz, slang meanings, what do kid words mean, slang dictionary, urban dictionary, urban words, slang words, slay meaning, zesty meaning" />
   <meta name="author" content="Slanguage" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
   <title>Slanguage - Slang Dictionary</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 20px;
+    }
+    .slang-card {
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .ribbon {
+      background: #ff4444;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    button.hear-btn {
+      margin-top: 10px;
+      cursor: pointer;
+      background: #fff;
+      border: none;
+      color: #6a11cb;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
+    #searchInput {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
   <nav>
     <div class="nav-container">
-      <div class="nav-left">Slanguage</div>
-      <div class="burger" id="burger">&#9776;</div>
-      <ul class="nav-right" id="navMenu">
-        <li><a href="#slangList">Dictionary</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#submitSlang">Submit</a></li>
-      </ul>
+      <div class="nav-left" style="font-weight:bold; font-size: 24px;">Slanguage</div>
     </div>
   </nav>
 
   <header>
-    <h1 style="color: white">📖 Slanguage</h1>
+    <h1>📖 Slanguage</h1>
     <p>The parent slang dictionary</p>
-    <br /><br />
     <input type="text" id="searchInput" placeholder="Search for slang..." />
   </header>
 
   <main>
-    
-	<section id="slangList">
-  <!-- Slang cards will be inserted here by JavaScript -->
-</section>
-
-
-
-
-
-    <br><br>
-
-    <section id="submitSlang">
-      <h2 style="text-align: center;">💬 Ask The Meaning Of a Slang Word</h2>
-      <br />
-      <form id="slangForm">
-        <input type="text" placeholder="Slang word" required />
-        <textarea placeholder="Question" required></textarea>
-        <button type="submit">Submit</button>
-      </form>
+    <section id="slangList">
+      <!-- Slang cards inserted here -->
     </section>
   </main>
-  
-  
+
   <script src="slangData.js"></script>
-
- 
- <script>
- 
- // Wait for DOM to load
-document.addEventListener('DOMContentLoaded', () => {
-  // Fill trending slang
-  const trendingList = document.getElementById('trendingList');
-  if (trendingList) {
-    trendingList.innerHTML = '';
-    slangData.filter(item => item.trending).forEach(item => {
-      const card = createSlangCard(item);
-      trendingList.appendChild(card);
-    });
-  }
-
-  // Fill full dictionary slang list
-  const slangList = document.getElementById('slangList');
-  if (slangList) {
-    slangList.innerHTML = '';
-    slangData.forEach(item => {
-      const card = createSlangCard(item);
-      slangList.appendChild(card);
-    });
-  }
-});
-
-// Helper function to create a card element for a slang word
-function createSlangCard(item) {
-  const card = document.createElement('div');
-  card.className = 'slang-card';
-
-  const ribbon = item.offensive ? `<div class="ribbon">⚠️ Offensive</div>` : '';
-
-  card.innerHTML = `
-    ${ribbon}
-    <h3>${item.word}</h3>
-    <p><strong>Meaning:</strong> ${item.meaning}</p>
-    <p><strong>Origin:</strong> ${item.origin || 'Unknown'}</p>
-    <p><em>${item.about || ''}</em></p>
-    <button class="hear-btn">🔊 Hear</button>
-  `;
-
-  // Add Web Speech API
-  const hearButton = card.querySelector('.hear-btn');
-  hearButton.addEventListener('click', () => {
-    const utterance = new SpeechSynthesisUtterance(`${item.word}. ${item.meaning}`);
-    utterance.lang = 'en-GB';
-    speechSynthesis.speak(utterance);
-  });
-
-  return card;
-}
-
-
-</script>
-  
-  
-  
   <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const slangList = document.getElementById('slangList');
-  const modal = document.getElementById('slangModal');
-  const closeModal = document.getElementById('closeModal');
+    document.addEventListener('DOMContentLoaded', () => {
+      const slangList = document.getElementById('slangList');
+      const searchInput = document.getElementById('searchInput');
 
-  const modalWord = document.getElementById('modalWord');
-  const modalMeaning = document.getElementById('modalMeaning');
-  const modalOrigin = document.getElementById('modalOrigin');
-  const modalAbout = document.getElementById('modalAbout');
+      // Create a slang card
+      function createSlangCard(item) {
+        const card = document.createElement('div');
+        card.className = 'slang-card';
 
-  const playAudioBtn = document.getElementById('playAudio');
-  let currentWord = '';
+        const ribbon = item.offensive ? `<div class="ribbon">⚠️ Offensive</div>` : '';
 
-  slangData.forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'slang-card';
-    card.innerHTML = `
-      <h3>${item.word}</h3>
-      <p>${item.meaning}</p>
-       <button onclick="speakSlang('${slang.word}', '${slang.meaning}')">🔊 Hear</button>
-	   
-    `;
-	
-	
-	function speakSlang(word, meaning) {
-  const utterance = new SpeechSynthesisUtterance(`${word}: ${meaning}`);
-  utterance.lang = 'en-GB'; // or 'en-US'
-  speechSynthesis.speak(utterance);
-}
+        card.innerHTML = `
+          ${ribbon}
+          <h3>${item.word}</h3>
+          <p><strong>Meaning:</strong> ${item.meaning}</p>
+          <p><strong>Origin:</strong> ${item.origin || 'Unknown'}</p>
+          <p><em>${item.about || ''}</em></p>
+          <button class="hear-btn">🔊 Hear</button>
+        `;
 
+        const hearButton = card.querySelector('.hear-btn');
+        hearButton.addEventListener('click', () => {
+          // Stop any current speech first
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(`${item.word}. ${item.meaning}`);
+          utterance.lang = 'en-GB';
+          window.speechSynthesis.speak(utterance);
+        });
 
-    card.querySelector('.more-btn').addEventListener('click', () => {
-      currentWord = item.word;
-      modalWord.textContent = item.word;
-      modalMeaning.textContent = item.meaning;
-      modalOrigin.textContent = item.origin || 'Unknown';
-      modalAbout.textContent = item.about || '';
+        return card;
+      }
 
-      modal.classList.remove('hidden');
+      // Render slang cards filtered by search query
+      function renderSlangCards(filterText = '') {
+        slangList.innerHTML = '';
+        const filteredData = slangData.filter(item => {
+          const searchStr = filterText.toLowerCase();
+          return (
+            item.word.toLowerCase().includes(searchStr) ||
+            item.meaning.toLowerCase().includes(searchStr) ||
+            (item.origin && item.origin.toLowerCase().includes(searchStr)) ||
+            (item.about && item.about.toLowerCase().includes(searchStr))
+          );
+        });
+
+        if (filteredData.length === 0) {
+          slangList.innerHTML = '<p>No slang found matching your search.</p>';
+          return;
+        }
+
+        filteredData.forEach(item => {
+          const card = createSlangCard(item);
+          slangList.appendChild(card);
+        });
+      }
+
+      // Initial render - show all
+      renderSlangCards();
+
+      // Add search event listener
+      searchInput.addEventListener('input', () => {
+        renderSlangCards(searchInput.value);
+      });
     });
-
-    slangList.appendChild(card);
-  });
-
-  closeModal.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
-
-  
-</script>
-
-  
-  
+  </script>
 </body>
 </html>
